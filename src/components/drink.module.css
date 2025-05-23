@@ -1,0 +1,48 @@
+.drink {
+    position: relative;
+    border: 1px solid #222222;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #241212;
+}
+
+.drink img {
+    float: right;
+    margin-left: 16px;
+    margin-bottom: 8px;
+    max-width: 200px;
+    border-radius: 12px;
+}
+
+.baseLabel {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.subLabel {
+    composes: baseLabel;
+
+    font-size: 1.2rem;
+}
+
+.sumLabel {
+    composes: baseLabel;
+
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+.nameLabel {
+    composes: baseLabel;
+
+    font-size: 2rem;
+    color: #241212;
+}
+
+@media (max-width: 620px) {
+    .drink img {
+        float: left;
+        margin-left: 0;
+        margin-right: 16px;
+    }
+}

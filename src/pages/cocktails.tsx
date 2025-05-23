@@ -1,8 +1,9 @@
 import { COCKTAIL_CODES } from '@/const';
-import { defineComponent } from 'vue';
+import { defineComponent, TransitionGroup } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import styles from './cocktails.module.css';
 import { useCocktails } from '@/composables/cocktail';
+import Drink from '@/components/drink';
 
 export default defineComponent({
     name: 'Cocktail',
@@ -19,34 +20,18 @@ export default defineComponent({
                     </nav>
                 </aside>
                 <section>
-                    {
-                        drinks.value.map((drink, i) => {
-                            return (
-                                <div key={i}>
-                                    <div>{drink.drink}</div>
-                                    <div>{drink.category}</div>
-                                    <div>{drink.alcoholic}</div>
-                                    <div>{drink.glass}</div>
-                                    <div>Instructions</div>
-                                    <div>{drink.getInstructions()}</div>
-                                    <div>List of ingredients</div>
-                                    <div>{drink.getIngredients().map(({ ingredient, measure }) => {
-                                        return (<div>
-                                            <div>{measure}</div>
-                                            <div>{ingredient}</div>
-                                        </div>)
-                                    })}</div>
+                    <TransitionGroup name="fade-list" tag="div">
 
-                                    <img
-                                        src={drink.thumb}
-                                        alt={drink.drink}
-                                        loading="lazy"
-                                        width={200}
-                                    />
-                                </div>
-                            )
-                        })
-                    }
+                        {
+                            drinks.value.map((drink, i) => {
+                                return (
+                                    <Drink key={i} class={styles.drinkItem} drink={drink} />
+                                )
+                            })
+                        }
+
+                    </TransitionGroup>
+
                 </section>
             </div>
         );

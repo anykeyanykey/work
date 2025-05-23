@@ -4,12 +4,21 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: sticky;
+  top: var(--top-indent);
 }
 
 .link {
   color: #333;
   text-decoration: none;
-  margin-right: 10px;
+  padding: 10px;
+  background-color: bisque;
+  will-change: transform;
+  transition: transform 1s;
+}
+
+.link:hover {
+  transform: translateX(20px);
 }
 
 .active {
@@ -20,6 +29,7 @@
 .pageContainer {
   display: flex;
   flex-direction: row;
+  gap: 1rem
 }
 
 .pageContainer aside {
@@ -28,6 +38,10 @@
 
 .pageContainer section {
   flex: 1;
+}
+
+.drinkItem+.drinkItem {
+  margin-top: 10px;
 }
 
 @media (max-width: 620px) {
@@ -43,5 +57,11 @@
 
   .pageContainer aside {
     flex: 1;
+  }
+
+  .link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 0px 5px #333;
+
   }
 }

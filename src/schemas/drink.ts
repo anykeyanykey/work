@@ -4,29 +4,35 @@ type DrinkTypeStr = {
 }
 
 export type DrinkDto = { idDrink: string } & DrinkTypeStr
+export type DrinkIngredient = { ingredient: string; measure: string }
 
 export class Drink implements DrinkDto {
     idDrink: string
     [key: `str${string}`]: string;
-    instructions: Record<`LANG_${string}`, string>;
-    ingredients: { ingredient: string; measure: string }[] = [];
+    private _instructions: Record<`LANG_${string}`, string>;
+    private _ingredients: DrinkIngredient[] = [];
+    private _lang = ''
 
     constructor(obj: DrinkDto) {
         this.idDrink = obj.idDrink
         Object.assign(this, obj)
-        this.instructions = Object.keys(obj).filter(key => /instructions/i.test(key)).reduce((res, key) => {
+        this._instructions = Object.keys(obj).filter(key => /instructions/i.test(key)).reduce((res, key) => {
             const lang = /instructions(.*)$/i.exec(key)?.[1] ?? ''
             res[`LANG_${lang}`] = obj[key as keyof DrinkTypeStr]
             return res
         }, {} as Record<`LANG_${string}`, string>)
-        this.ingredients = Object.keys(obj).filter(key => /ingredient/i.test(key)).reduce((res, key) => {
+        this._ingredients = Object.keys(obj).filter(key => /ingredient/i.test(key)).reduce((res, key) => {
             const index = /ingredient(\d+)$/i.exec(key)?.[1] ?? ''
             res.push({
                 ingredient: obj[key as keyof DrinkTypeStr],
                 measure: obj['strMeasure' + index as keyof DrinkTypeStr]
             })
             return res
-        }, [] as { ingredient: string; measure: string }[])
+        }, [] as DrinkIngredient[])
+    }
+
+    set lang(lang: string) {
+        this._lang = lang
     }
 
     get id() {
@@ -53,11 +59,11 @@ export class Drink implements DrinkDto {
         return this.strGlass
     }
 
-    getInstructions(lang = '') {
-        return this.instructions[`LANG_${lang}`]
+    get instructions() {
+        return this._instructions[`LANG_${this._lang}`]
     }
 
-    getIngredients() {
-        return this.ingredients
+    get ingredients() {
+        return this._ingredients
     }
 }

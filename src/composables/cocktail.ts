@@ -8,7 +8,7 @@ export const useCocktails = () => {
 
     const cocktailKey = ref()
     const loading = ref(false)
-    const drinks = ref<Drink[]>([])
+    const drinks = ref<InstanceType<typeof Drink>[]>([])
 
     const { commonService } = api
 
