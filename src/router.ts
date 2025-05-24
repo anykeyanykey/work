@@ -8,7 +8,7 @@ const NotFoundRoteName = 'NotFound'
 const routes: RouteRecordRaw[] = [
     { path: '/', redirect: '/' + Object.keys(COCKTAIL_CODES)[0] },
     {
-        path: '/:cocktail', component: Cocktail, props: true,
+        path: '/:cocktail', component: Cocktail,
         beforeEnter: (to, from, next) => {
             const exists = Object.keys(COCKTAIL_CODES).includes(to.params.cocktail as string);
             if (!exists) {

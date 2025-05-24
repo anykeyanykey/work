@@ -22,15 +22,22 @@ export default defineComponent({
           alt={drink.value.drink}
           loading="lazy"
         />
-        <div class={styles.nameLabel}>{drink.value.drink}</div>
-        <div class={styles.sumLabel}>{drink.value.category}</div>
-        <div class={styles.sumLabel}>{drink.value.alcoholic}</div>
-        <div class={styles.sumLabel}>{drink.value.glass}</div>
+        <div class={styles.nameLabel}>
+          {drink.value.drink}
+        </div>
+        <div class={styles.blockWrapper}>
+          <ul>
+            <li><div class={styles.summaryLabel}>{drink.value.category}</div></li>
+            <li><div class={styles.summaryLabel}>{drink.value.alcoholic}</div></li>
+            <li><div class={styles.summaryLabel}>{drink.value.glass}</div></li>
+          </ul>
+        </div>
         <div class={styles.subLabel}>Instructions</div>
-        <div>{drink.value.instructions}</div>
+        <div class={styles.blockWrapper}>
+          {drink.value.instructions}
+        </div>
         <div class={styles.subLabel}>List of ingredients</div>
-        <div>{drink.value.ingredients.map((ingredient, i) => (<Ingredient key={i} ingredient={ingredient} />))}</div>
-
+        <div class={[styles.blockWrapper, styles.ingredientsWrapper]}>{drink.value.ingredients.map((ingredient, i) => (<Ingredient key={i} ingredient={ingredient} />))}</div>
       </div >
     );
   }

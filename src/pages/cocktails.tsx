@@ -11,7 +11,7 @@ export default defineComponent({
         const { drinks } = useCocktails()
 
         return () => (
-            <div class={styles.pageContainer}>
+            <div class={styles.cocktailsPage}>
                 <aside>
                     <nav class={styles.nav}>
                         {Object.keys(COCKTAIL_CODES).map((nav, i) => (
@@ -21,7 +21,6 @@ export default defineComponent({
                 </aside>
                 <section>
                     <TransitionGroup name="fade-list" tag="div">
-
                         {
                             drinks.value.map((drink, i) => {
                                 return (
@@ -29,9 +28,7 @@ export default defineComponent({
                                 )
                             })
                         }
-
                     </TransitionGroup>
-
                 </section>
             </div>
         );

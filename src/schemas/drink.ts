@@ -23,10 +23,12 @@ export class Drink implements DrinkDto {
         }, {} as Record<`LANG_${string}`, string>)
         this._ingredients = Object.keys(obj).filter(key => /ingredient/i.test(key)).reduce((res, key) => {
             const index = /ingredient(\d+)$/i.exec(key)?.[1] ?? ''
-            res.push({
-                ingredient: obj[key as keyof DrinkTypeStr],
-                measure: obj['strMeasure' + index as keyof DrinkTypeStr]
-            })
+            const ingredient = obj[key as keyof DrinkTypeStr]
+            const measure = obj['strMeasure' + index as keyof DrinkTypeStr]
+                ; (ingredient || measure) && res.push({
+                    ingredient,
+                    measure
+                })
             return res
         }, [] as DrinkIngredient[])
     }

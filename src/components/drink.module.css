@@ -1,9 +1,21 @@
 .drink {
     position: relative;
-    border: 1px solid #222222;
-    border-radius: 20px;
+    border: 1px solid black;
     padding: 10px;
-    background-color: #241212;
+}
+
+.ingredientsWrapper {
+
+    display: inline-block;
+}
+
+.blockWrapper {
+    padding: 15px 0;
+    line-height: 1.5rem;
+}
+
+.blockWrapper:last-child {
+    padding-bottom: 0;
 }
 
 .drink img {
@@ -16,7 +28,6 @@
 
 .baseLabel {
     font-weight: bold;
-    margin-bottom: 1rem;
 }
 
 .subLabel {
@@ -25,18 +36,15 @@
     font-size: 1.2rem;
 }
 
-.sumLabel {
-    composes: baseLabel;
+.summaryLabel {
 
-    font-size: 1.5rem;
-    margin-left: 10px;
+    font-size: 1.3rem;
 }
 
 .nameLabel {
     composes: baseLabel;
 
     font-size: 2rem;
-    color: #241212;
 }
 
 @media (max-width: 620px) {

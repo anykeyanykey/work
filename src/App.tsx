@@ -8,9 +8,13 @@ export default defineComponent({
   name: 'App',
   setup() {
     return () => (
-      <div class={'container'}>
-        <div class={'headerLabel'}>Cocktails</div>
-        <RouterView />
+      <div class={'pageContainer'}>
+        <div class={'pageHeader'}>
+          <div class={'headerLabel'}>Cocktails</div>
+        </div>
+        <div class={'pageContent'}>
+          <RouterView />
+        </div>
       </div >
     );
   }

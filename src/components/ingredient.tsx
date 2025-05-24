@@ -12,10 +12,11 @@ export default defineComponent({
         }
     },
     setup(props) {
-        return () => (<div class={styles.ingredient}>
-            <div>{props.ingredient.measure}</div>
-            <div>{props.ingredient.ingredient}</div>
-        </div>
+        return () => (
+            <div class={styles.ingredient}>
+                <div>{props.ingredient.measure}</div>
+                <div>{props.ingredient.ingredient}</div>
+            </div>
         );
     }
 });

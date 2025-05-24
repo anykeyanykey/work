@@ -1,6 +1,15 @@
+@import './reset.css';
+
 :root {
     --top-indent: 20px;
+    --header-height: 100px;
     --bottom-indent: var(--top-indent);
+}
+
+@media (max-width: 620px) {
+    :root {
+        --header-height: 62px;
+    }
 }
 
 *,
@@ -9,20 +18,40 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #2A2A2A;
-    color: #9C9C9C;
-    margin: 0;
-    padding: 0;
+ul {
+    list-style: square;
+    padding-left: 20px;
 }
 
-.container {
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 0 20px;
+    height: 100vh;
+}
+
+.pageContainer {
     max-width: 1024px;
     min-width: 360px;
     margin: 0 auto;
-    padding-top: var(--top-indent);
+    padding-top: var(--header-height);
     padding-bottom: var(--bottom-indent);
+    position: relative;
+}
+
+.pageHeader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    height: var(--header-height);
+}
+
+.pageContent {
+    position: relative;
 }
 
 .headerLabel {
