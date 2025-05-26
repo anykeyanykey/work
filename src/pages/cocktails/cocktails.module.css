@@ -1,0 +1,72 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: var(--top-indent);
+}
+
+.link {
+  color: #333;
+  text-decoration: none;
+  padding: 10px;
+  background-color: white;
+  will-change: transform;
+  transition: transform 1s;
+  border: 1px solid black;
+  box-shadow: 2px 2px 2px black;
+}
+
+.link:hover {
+  transform: translateX(10px);
+}
+
+.link.active {
+  font-weight: bold;
+}
+
+.cocktailsPage {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  --aside-min-width: 200px;
+}
+
+.cocktailsPage aside {
+  min-width: var(--aside-min-width);
+  padding-right: 20px;
+  border-right: 1px solid black;
+}
+
+.cocktailsPage section {
+  flex: 1;
+}
+
+.drinkItem + .drinkItem {
+  margin-top: 10px;
+}
+
+@media (max-width: 620px) {
+  .cocktailsPage {
+    flex-direction: column;
+  }
+
+  .nav {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .nav .link {
+    flex: 100px 1 1;
+  }
+
+  .cocktailsPage aside {
+    flex: 1;
+    padding-right: 0;
+    border-right: none;
+  }
+
+  .link:hover {
+    transform: translateY(-5px);
+  }
+}

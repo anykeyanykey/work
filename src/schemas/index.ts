@@ -1,1 +1,1 @@
-export * from './drink'
+export * from './drink';

@@ -10,6 +10,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "experimentalDecorators": true,
     "paths": {
       "@/*": [
         "src/*"

@@ -4,8 +4,8 @@
 
 1. **Clone the repository:**
    ```
-   git clone <repository-url>
-   cd vue3-spa
+   git clone https://github.com/anykeyanykey/work.git
+   cd work
    ```
 
 2. **Install dependencies:**

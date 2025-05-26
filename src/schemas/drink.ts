@@ -1,63 +1,80 @@
-
 type DrinkTypeStr = {
-    [K in `${'str'}${string}`]: string;
-}
+  [K in `${'str'}${string}`]: string;
+};
 
-export type DrinkDto = { idDrink: string } & DrinkTypeStr
+export type DrinkDto = { idDrink: string } & DrinkTypeStr;
+export type DrinkInstructions = Record<`LANG_${string}`, string>;
+export type DrinkIngredientItem = { ingredient: string; measure: string };
+
+const INSTRUCTIONS_REGEXP = /instructions(.*)$/i;
+const INGREDIENT_REGEXP = /ingredient(\d+)$/i;
 
 export class Drink implements DrinkDto {
-    idDrink: string
-    [key: `str${string}`]: string;
-    instructions: Record<`LANG_${string}`, string>;
-    ingredients: { ingredient: string; measure: string }[] = [];
+  idDrink: string;
+  [key: `str${string}`]: string;
+  _instructions: DrinkInstructions;
+  _ingredients: DrinkIngredientItem[];
+  _lang = '';
 
-    constructor(obj: DrinkDto) {
-        this.idDrink = obj.idDrink
-        Object.assign(this, obj)
-        this.instructions = Object.keys(obj).filter(key => /instructions/i.test(key)).reduce((res, key) => {
-            const lang = /instructions(.*)$/i.exec(key)?.[1] ?? ''
-            res[`LANG_${lang}`] = obj[key as keyof DrinkTypeStr]
-            return res
-        }, {} as Record<`LANG_${string}`, string>)
-        this.ingredients = Object.keys(obj).filter(key => /ingredient/i.test(key)).reduce((res, key) => {
-            const index = /ingredient(\d+)$/i.exec(key)?.[1] ?? ''
-            res.push({
-                ingredient: obj[key as keyof DrinkTypeStr],
-                measure: obj['strMeasure' + index as keyof DrinkTypeStr]
-            })
-            return res
-        }, [] as { ingredient: string; measure: string }[])
-    }
+  constructor(obj: DrinkDto) {
+    this.idDrink = obj.idDrink;
+    Object.assign(this, obj);
+    this._instructions = Object.keys(obj)
+      .filter((key) => INSTRUCTIONS_REGEXP.test(key))
+      .reduce((res, key) => {
+        const lang = INSTRUCTIONS_REGEXP.exec(key)?.[1] ?? '';
+        res[`LANG_${lang}`] = obj[key as keyof DrinkTypeStr];
+        return res;
+      }, {} as DrinkInstructions);
+    this._ingredients = Object.keys(obj)
+      .filter((key) => INGREDIENT_REGEXP.test(key))
+      .reduce((res, key) => {
+        const index = INGREDIENT_REGEXP.exec(key)?.[1] ?? '';
+        const ingredient = obj[key as keyof DrinkTypeStr];
+        const measure = obj[`strMeasure${index}` as keyof DrinkTypeStr];
+        if (ingredient || measure) {
+          res.push({
+            ingredient,
+            measure,
+          });
+        }
+        return res;
+      }, [] as DrinkIngredientItem[]);
+  }
 
-    get id() {
-        return this.idDrink
-    }
+  set lang(lang: string) {
+    this._lang = lang;
+  }
 
-    get drink() {
-        return this.strDrink
-    }
+  get id() {
+    return this.idDrink;
+  }
 
-    get thumb() {
-        return this.strDrinkThumb
-    }
+  get drink() {
+    return this.strDrink;
+  }
 
-    get category() {
-        return this.strCategory
-    }
+  get thumb() {
+    return this.strDrinkThumb;
+  }
 
-    get alcoholic() {
-        return this.strAlcoholic
-    }
+  get category() {
+    return this.strCategory;
+  }
 
-    get glass() {
-        return this.strGlass
-    }
+  get alcoholic() {
+    return this.strAlcoholic;
+  }
 
-    getInstructions(lang = '') {
-        return this.instructions[`LANG_${lang}`]
-    }
+  get glass() {
+    return this.strGlass;
+  }
 
-    getIngredients() {
-        return this.ingredients
-    }
+  get instructions() {
+    return this._instructions[`LANG_${this._lang}`];
+  }
+
+  get ingredients() {
+    return this._ingredients;
+  }
 }

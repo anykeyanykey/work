@@ -1,0 +1,8 @@
+.ingredient {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 200px));
+}
+
+.ingredient + .ingredient {
+  border-top: 1px solid black;
+}

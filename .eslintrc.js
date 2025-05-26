@@ -8,15 +8,16 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:vue/vue3-recommended',
-        '@vue/typescript/recommended',
+        'plugin:@typescript-eslint/recommended',
     ],
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
     },
+    plugins: [
+        '@typescript-eslint'
+    ],
     rules: {
         'vue/no-unused-vars': 'warn',
-        'vue/no-multiple-template-root': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
     },
 };
